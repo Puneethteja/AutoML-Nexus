@@ -1,0 +1,8 @@
+RandomForest:
+  enabled: true
+
+SVM:
+  enabled: true
+
+ANN:
+  enabled: true

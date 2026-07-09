@@ -1,0 +1,15 @@
+classification:
+  primary: accuracy
+
+  secondary:
+    - precision
+    - recall
+    - f1
+
+regression:
+  primary: r2
+
+  secondary:
+    - mae
+    - mse
+    - rmse

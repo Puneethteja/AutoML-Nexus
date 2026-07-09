@@ -1,0 +1,21 @@
+RandomForest:
+  n_estimators:
+    low: 100
+    high: 500
+
+  max_depth:
+    low: 5
+    high: 30
+
+ANN:
+  layers:
+    low: 1
+    high: 5
+
+  neurons:
+    low: 32
+    high: 512
+
+  learning_rate:
+    low: 0.0001
+    high: 0.01

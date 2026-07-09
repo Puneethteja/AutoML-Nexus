@@ -1,0 +1,19 @@
+{
+    "run_id": "bab8c78b",
+    "timestamp": "2026-07-09T17:44:55.239636",
+    "dataset_hash": "bab8c78b12bd4b32b7964f775ed5a24d",
+    "environment": {
+        "numpy": "2.4.6",
+        "optuna": "4.9.0",
+        "pandas": "3.0.3",
+        "scikit-learn": "1.9.0"
+    },
+    "results": {
+        "test_score": 0.9333333333333333
+    },
+    "best_params": {
+        "model_type": "rf",
+        "n_estimators": 113,
+        "max_depth": 2
+    }
+}

@@ -1,0 +1,9 @@
+random_state: 42
+test_size: 0.2
+validation_size: 0.1
+
+cv_folds: 5
+n_trials: 50
+
+save_model: true
+save_results: true
