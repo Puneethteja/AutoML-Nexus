@@ -1,3 +1,0 @@
-2026-07-09 13:44:36,246 | ERROR | src.main | Task f6d9caeb-d37d-4c34-b9ac-20808b68fdae failed: AutoMLPipeline.run() missing 1 required positional argument: 'dataset_path'
-2026-07-09 13:44:50,876 | ERROR | src.main | Task 36af6ed4-b5eb-42c1-945f-b20660fa0958 failed: AutoMLPipeline.run() missing 1 required positional argument: 'dataset_path'
-2026-07-09 13:46:53,189 | ERROR | src.main | Task 843ab1e9-3e21-40b6-848d-4ed68c1cc6cc failed: AutoMLPipeline.run() missing 1 required positional argument: 'dataset_path'
