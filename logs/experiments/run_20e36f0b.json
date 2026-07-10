@@ -1,7 +1,7 @@
 {
-    "run_id": "bab8c78b",
-    "timestamp": "2026-07-10T14:16:46.933543",
-    "dataset_hash": "bab8c78b12bd4b32b7964f775ed5a24d",
+    "run_id": "20e36f0b",
+    "timestamp": "2026-07-10T12:51:27.496337",
+    "dataset_hash": "20e36f0bcc0fec359eb394ee947237dd",
     "environment": {
         "numpy": "2.4.6",
         "optuna": "4.9.0",
@@ -9,13 +9,12 @@
         "scikit-learn": "1.9.0"
     },
     "results": {
-        "test_score": 0.9
+        "test_score": 1.0
     },
     "best_params": {
         "model_type": "rf",
-        "n_estimators": 67,
-        "max_depth": 16,
-        "criterion": "gini"
+        "n_estimators": 76,
+        "max_depth": 28
     },
     "optimization_history": [
         {
@@ -24,15 +23,15 @@
         },
         {
             "trial": 2,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 3,
-            "accuracy": 0.9428571428571428
+            "accuracy": -Infinity
         },
         {
             "trial": 4,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 5,
@@ -40,63 +39,63 @@
         },
         {
             "trial": 6,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 7,
-            "accuracy": 0.9428571428571428
+            "accuracy": -Infinity
         },
         {
             "trial": 8,
-            "accuracy": -Infinity
+            "accuracy": 1.0
         },
         {
             "trial": 9,
-            "accuracy": 0.9428571428571428
+            "accuracy": -Infinity
         },
         {
             "trial": 10,
-            "accuracy": -Infinity
+            "accuracy": 1.0
         },
         {
             "trial": 11,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 12,
-            "accuracy": 0.9523809523809523
+            "accuracy": 1.0
         },
         {
             "trial": 13,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 14,
-            "accuracy": 0.9428571428571428
+            "accuracy": 0.946713130629273
         },
         {
             "trial": 15,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 16,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 17,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 18,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         },
         {
             "trial": 19,
-            "accuracy": -Infinity
+            "accuracy": 0.9384459149273596
         },
         {
             "trial": 20,
-            "accuracy": 0.9428571428571428
+            "accuracy": 1.0
         }
     ]
 }

@@ -1,7 +1,7 @@
 import optuna
 import logging
 import numpy as np
-from sklearn.model_selection import cross_val_score, StratifiedKFold
+from sklearn.model_selection import cross_val_score, KFold, StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 from backend.models.ml_models import MLModelFactory
 from backend.optimization.search_space import get_search_space
@@ -22,26 +22,51 @@ class OptunaEngine:
             model_type = trial.suggest_categorical("model_type", ["rf", "xgb"])
             params = get_search_space(trial, model_type, self.task_type)
             
+            x_train = np.nan_to_num(x_train, nan=0.0) 
             scaler = StandardScaler()
             x_scaled = scaler.fit_transform(x_train)
 
             model = MLModelFactory.get_model(model_type, self.task_type, **params)
             
-            cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.seed)
-            scores = cross_val_score(model, x_scaled, y_train, cv=cv, scoring='accuracy')
+            if self.task_type == "classification":
+                cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.seed)
+                scoring = 'accuracy'
+            else:
+                cv = KFold(n_splits=5, shuffle=True, random_state=self.seed)
+                scoring = 'r2'
+
+            scores = cross_val_score(model, x_scaled, y_train, cv=cv, scoring=scoring)
+            mean_score = scores.mean()
             
-            return scores.mean()
+            return -np.inf if np.isnan(mean_score) else mean_score
         except Exception as e:
             logger.warning(f"Trial failed: {e}")
-            return -np.inf 
+            return -np.inf
 
-    def run(self, x_train, y_train, n_trials: int = 20):
-        self.study.optimize(lambda trial: self.objective(trial, x_train, y_train), n_trials=n_trials)
+    def run(self, x_train, y_train, n_trials: int = 20, progress_callback=None):
+        def optuna_callback(study, trial):
+            if progress_callback:
+                progress = int((((trial.number + 1) / n_trials) * 80) + 20)
+                progress_callback(progress)
+
+        self.study.optimize(
+            lambda trial: self.objective(trial, x_train, y_train), 
+            n_trials=n_trials, 
+            callbacks=[optuna_callback] if progress_callback else None
+        )
+        
+        history = []
+        for trial in self.study.trials:
+            if trial.value is not None:
+                history.append({
+                    "trial": trial.number + 1, 
+                    "accuracy": float(trial.value)
+                })
         
         if len(self.study.trials) == 0 or self.study.best_trial is None:
             raise RuntimeError("Optimization failed: No trials were completed successfully.")
             
-        return self.study.best_params
+        return self.study.best_params, history
 
     def get_cv_scores(self, x_train, y_train, best_params):
         scaler = StandardScaler()
@@ -51,5 +76,12 @@ class OptunaEngine:
             self.task_type, 
             **{k: v for k, v in best_params.items() if k != "model_type"}
         )
-        cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.seed)
-        return cross_val_score(model, x_scaled, y_train, cv=cv, scoring='accuracy')
+        
+        if self.task_type == "classification":
+            cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.seed)
+            scoring = 'accuracy'
+        else:
+            cv = KFold(n_splits=5, shuffle=True, random_state=self.seed)
+            scoring = 'r2'
+            
+        return cross_val_score(model, x_scaled, y_train, cv=cv, scoring=scoring)
