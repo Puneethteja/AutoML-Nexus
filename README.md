@@ -38,11 +38,13 @@ We keep things organized so you can focus on the results rather than the clutter
 * `/node_modules`: Dependencies required for the React environment.
 
 ### Backend (`/backend`)
-* `/data`: Managed storage for uploaded CSV datasets.
-* `/models`: Persisted trained model artifacts.
-* `/pipelines`: Core logic for automated training and hyperparameter tuning.
-* `/api`: FastAPI/Flask endpoints for task management and status polling.
-
+* `/automl`: Orchestrates the ML lifecycle (`detector.py`, `model_selector.py`, `pipeline.py`).
+* `/data`: Dataset ingestion, preprocessing, and train/test splitting workflows.
+* `/evaluation`: Auditing tools including `metrics.py` and `validator.py`.
+* `/models`: Persisted model architectures (`ann_model.py`, `ml_models.py`).
+* `/optimization`: Optuna-based hyperparameter tuning engine and search-space definitions.
+* `/utils`: Shared logging and system helper functions.
+* `main.py`: FastAPI entry point coordinating API requests.
 ---
 
 ## 🛠 Tech Stack
